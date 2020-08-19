@@ -18,5 +18,5 @@ const groupSchema = new Schema({
     updatedAt: 'updated_at'
   },
 });
-const Group = mongoose.model('Group', userSchema);
+const Group = mongoose.model('Group', groupSchema);
 module.exports = Group;
