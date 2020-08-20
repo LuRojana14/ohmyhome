@@ -2,24 +2,29 @@ const express = require ('express');
 // DEVUELVE UN OBJETO EN EL CUAL PODRE INGRRESAR RUTAS 
 const router= express.Router();
 const mongoose= require("mongoose");
+const User = require('../models/User');
+const Group = require('../models/Group');
 const Task = require('../models/Task');
 
 
 router.get('/tasks',(req,res)=>{
     //BUSCA TODOS LOS DOCUMENTOS QUE TENGO EN MONGODB
     Task.find()
+    //la propieda la cual estoy populando
+        .populate("user_id")
         .then((allTasks)=>{
             res.json(allTasks);
         })
         .catch(err=>console.log(err))
 
-    
+  //  console.log(allTasks)
 });
 
     //RUTA PARA AGREGAR TAREAS(DATOS)
-    router.post("/addTask", (req, res, next) => {
+    router.post("/tasks", (req, res, next) => {
         Task.create({
           title: req.body.title,
+         
           tasks: [],
         })
           .then((response) => {

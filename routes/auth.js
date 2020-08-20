@@ -45,6 +45,8 @@ router.post(
   }
 );
 
+
+
 //  POST '/login'
 
 // chequea que el usuario no esté logueado usando la función helper (chequea si existe req.session.currentUser)

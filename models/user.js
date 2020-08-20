@@ -4,7 +4,15 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-}, {
+  tasks:[
+    {
+      task_id: {type : Schema.Types.ObjectId, ref: 'Task'},
+      state: {type: String, enum:["pending", "complete"]},
+      user_id: {type : Schema.Types.ObjectId, ref: 'User'}
+    }]
+},
+
+{
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
