@@ -11,7 +11,7 @@ const groupSchema = new Schema({
     user_id: {type : Schema.Types.ObjectId, ref: 'User'}
   }
  ],
-}
+},
 {
   timestamps: {
     createdAt: 'created_at',

@@ -11,6 +11,7 @@ const MongoStore = require("connect-mongo")(session);
 const cors = require("cors");
 const morgan = require ("morgan");
 const taskRouter= require("./routes/taskRoute")
+const profileRouter= require("./routes/profileRoute")
 
 
 const auth = require("./routes/auth");
@@ -72,6 +73,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/auth", auth);
 //EMPIEZA AQUI
 app.use("/api", taskRouter);
+app.use("/profile", profileRouter);
 
 // ERROR HANDLING
 // catch 404 and forward to error handler

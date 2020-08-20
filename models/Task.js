@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
   title: { type: String, required: true },
-  user_id: {type : Schema.Types.ObjectId, ref: 'User'}
+  user_id: {type : Schema.Types.ObjectId, ref: 'User'},
+  state: {type: String, enum:["pending", "complete"]}
 }, {
   timestamps: {
     createdAt: 'created_at',
