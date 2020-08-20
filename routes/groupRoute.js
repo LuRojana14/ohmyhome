@@ -42,6 +42,33 @@ router.get("/allusers", (req, res, next) => {
 });
 
 
+// router.get("/allusers", (req, res, next) => {
+//   Group.find()
+//     .populate({
+//       path: "tasks",
+//       populate: {
+//         path: "title",
+//         model: "Task",
+//       },
+//     })
+//     .populate({
+//       path: "users",
+//       populate: {
+//         path: "username",
+//         model: "User",
+//       },
+//     })
+//     .then((allUsersFromDB) => {
+//       res.json(allUsersFromDB);
+//     })
+//     .catch((error) => {
+//       console.log("Error");
+//     });
+// });
+
+
+
+
 module.exports= router;
 
 
