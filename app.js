@@ -12,6 +12,7 @@ const cors = require("cors");
 const morgan = require ("morgan");
 const taskRouter= require("./routes/taskRoute")
 const profileRouter= require("./routes/profileRoute")
+const groupRouter= require("./routes/groupRoute")
 
 
 const auth = require("./routes/auth");
@@ -74,6 +75,7 @@ app.use("/auth", auth);
 //EMPIEZA AQUI
 app.use("/api", taskRouter);
 app.use("/profile", profileRouter);
+app.use("/group", groupRouter);
 
 // ERROR HANDLING
 // catch 404 and forward to error handler

@@ -13,7 +13,7 @@ const Task = require('../models/Task');
 router.get("/", (req, res, next) => {
     if (req.session.currentUser._id) {
       User.findOne({ _id: req.session.currentUser._id })
-        .populate("users")
+        .populate("username")
         //POPULE DEL MODELO TASK
         .populate({path:"tasks",
         //LAS PROPIEDADES ANIDADAS
@@ -27,7 +27,7 @@ router.get("/", (req, res, next) => {
             }
     })
         .then((myUser) => {
-           res.json("myUser");
+           res.json(myUser);
         })
         .catch((error) => {
           console.log("Error");

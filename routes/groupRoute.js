@@ -7,30 +7,46 @@ const User = require('../models/User');
 const Task = require('../models/Task');
 
 
+//RUTA PARA AGREGAR TAREAS(DATOS)
+    router.post("/creategroup", (req, res, next) => {
+        Group.create({
+          groupName: req.body.groupName,
+          users:[],
+          tasks: [],
+        })
+          .then((response) => {
+            res.json(response);
+          })
+          .catch((err) => {
+            res.json(err);
+          });
+      });
 
 
 
-router.get("/group", (req, res, next) => {
-    if (req.session.currentUser._id) {
-      Group.findOne({ _id: req.session.currentUser._id })
-        .populate("users")
-        //POPULE DEL MODELO TASK
-        .populate({path:"tasks",
-        //LAS PROPIEDADES ANIDADAS
-            populate:{
-                path:"task_id",
-                model:"Task"
-            },
-            populate:{
-                path:"user_id",
-                model:"Task"
-            }
-    })
-        .then((myUser) => {
-           res.json("myUser");
+router.get("/allusers", (req, res, next) => {
+//    let allUsers= {}
+   const allUsers=req.query.username;
+    Group.find(allUsers)
+        .populate("username")
+        .populate("tasks")
+    
+        .then((allUsersFromDB) => {
+         console.log({aqui: allUsersFromDB})
+           res.json(allUsersFromDB);
         })
         .catch((error) => {
           console.log("Error");
         });
-    }
-  });
+    
+});
+
+
+module.exports= router;
+
+
+  
+
+
+
+  

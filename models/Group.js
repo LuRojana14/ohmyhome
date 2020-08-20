@@ -4,13 +4,7 @@ const groupSchema = new Schema({
   groupName: { type: String, required: true },
   users: [{type : Schema.Types.ObjectId, ref: 'User'}],
   listItems: [String],
-  tasks:[
-  {
-    task_id: {type : Schema.Types.ObjectId, ref: 'Task'},
-    state: {type: String, enum:["pending", "complete"]},
-    user_id: {type : Schema.Types.ObjectId, ref: 'User'}
-  }
- ],
+  tasks:[{type : Schema.Types.ObjectId, ref: 'Task'}],
 },
 {
   timestamps: {
