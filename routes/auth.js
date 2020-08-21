@@ -21,7 +21,7 @@ router.post(
   // revisa que se hayan completado los valores de username y password usando la función helper
   validationLoggin(),
   async (req, res, next) => {
-    const { username, password, namegroup, tasks} = req.body;
+    const { username, password, namegroup, tasks } = req.body;
 
     try {
       // chequea si el username ya existe en la BD
@@ -32,8 +32,14 @@ router.post(
         // en caso contratio, si el usuario no existe, hace hash del password y crea un nuevo usuario en la BD
         const salt = bcrypt.genSaltSync(saltRounds);
         const hashPass = bcrypt.hashSync(password, salt);
-        const newUser = await User.create({ username, password: hashPass, namegroup, tasks });
+        const newUser = await User.create({
+          username,
+          password: hashPass,
+          namegroup: groupName,
+          tasks,
+        });
         // luego asignamos el nuevo documento user a req.session.currentUser y luego enviamos la respuesta en json
+        console.log(newUser, "jhfsdfcgjhvnugshfnudgnhdjvngh");
         req.session.currentUser = newUser;
         res
           .status(200) //  OK
@@ -44,8 +50,6 @@ router.post(
     }
   }
 );
-
-
 
 //  POST '/login'
 
