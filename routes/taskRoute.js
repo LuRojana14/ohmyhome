@@ -3,6 +3,8 @@ const express = require ('express');
 const router= express.Router();
 const mongoose= require("mongoose");
 const Task = require('../models/Task');
+const Group = require('../models/Group');
+const User = require('../models/User');
 
 
 router.get('/tasks',(req,res)=>{
@@ -20,13 +22,40 @@ router.get('/tasks',(req,res)=>{
 
     //RUTA PARA AGREGAR TAREAS(DATOS)
     router.post("/tasks", (req, res, next) => {
+      let taskId;
         Task.create({
           title: req.body.title,
-         
-          tasks: [],
+          user_id:req.body.user_id,
+          state:"pending"
+
         })
-          .then((response) => {
-            res.json(response);
+          .then((newTask) => {
+
+            taskId=newTask._id
+            
+            Group.findOneAndUpdate(
+              {groupName:req.body.namegroup},
+              {$push:{tasks:newTask}},
+              //DEVUELVE LA NUEVA VERSION ACTUALIZADA
+              {new:true}
+              )
+            .then((updatedGroup)=>{
+              User.findByIdAndUpdate(
+                req.body.user_id,
+                {$push:{tasks:newTask}},
+                {new:true}
+                 )
+                 .then((updateUser)=>{
+                  res.json(updateUser);
+                 })
+                 .catch((err) => {
+                  res.json(err);
+                });
+            })
+            .catch((err) => {
+              res.json(err);
+            });
+            
           })
           .catch((err) => {
             res.json(err);
