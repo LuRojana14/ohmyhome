@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
+  namegroup: String, 
   tasks:[{type : Schema.Types.ObjectId, ref: 'Task'}],
 },
 

@@ -9,15 +9,21 @@ const Task = require('../models/Task');
 
 //RUTA PARA AGREGAR TAREAS(DATOS)
     router.post("/creategroup", (req, res, next) => {
+      console.log("hola", req.body.groupName)
+      User.find({namegroup:req.body.groupName}) 
+      .then((users)=>{
+        console.log("aqui", users)
         Group.create({
           groupName: req.body.groupName,
-          users:[],
+          users:users,
           tasks: [],
         })
           .then((response) => {
             res.json(response);
           })
-          .catch((err) => {
+
+      })
+         .catch((err) => {
             res.json(err);
           });
       });
@@ -27,9 +33,9 @@ const Task = require('../models/Task');
 router.get("/allusers", (req, res, next) => {
 //    let allUsers= {}
    const allUsers=req.query.username;
-    Group.find(allUsers)
-        .populate("username")
-        .populate("tasks")
+    Group.find({groupName: req.body.groupName})
+        // .populate({path:"users", model:"User"})
+        // .populate ({path:"tasks", model:"Task"})
     
         .then((allUsersFromDB) => {
          console.log({aqui: allUsersFromDB})
