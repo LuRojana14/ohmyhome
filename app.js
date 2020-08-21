@@ -13,6 +13,7 @@ const morgan = require ("morgan");
 const taskRouter= require("./routes/taskRoute")
 const profileRouter= require("./routes/profileRoute")
 const groupRouter= require("./routes/groupRoute")
+const messageRouter= require("./routes/messageRoute")
 
 
 const auth = require("./routes/auth");
@@ -76,6 +77,7 @@ app.use("/auth", auth);
 app.use("/api", taskRouter);
 app.use("/profile", profileRouter);
 app.use("/group", groupRouter);
+app.use("/message", messageRouter);
 
 // ERROR HANDLING
 // catch 404 and forward to error handler
