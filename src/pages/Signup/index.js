@@ -18,8 +18,16 @@ class SignUpClass extends Component {
   }
 
   onSubmit = (event) => {
+    event.preventDefault();
     const { username, password, namegroup } = this.state
     this.props.signup({ username, password, namegroup })
+    axios
+    .post("http://localhost:4000/auth/signup", { username, password, namegroup })
+    .then((response) => {
+        console.log('respuesta:', response);
+        //TODO: ver que poner aqui
+    })
+    .catch((error) => console.log(error));
   }
 
 
