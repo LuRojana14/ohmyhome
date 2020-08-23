@@ -12,7 +12,7 @@ const Task = require('../models/Task');
       console.log("hola", req.body.groupName)
       User.find({namegroup:req.body.groupName}) 
       .then((users)=>{
-        console.log("aqui", users)
+        console.log("USR:", users)
         Group.create({
           groupName: req.body.groupName,
           users:users,
