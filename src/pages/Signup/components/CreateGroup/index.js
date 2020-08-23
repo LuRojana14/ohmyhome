@@ -1,6 +1,7 @@
 
 import React, { Component } from "react";
 import axios from "axios";
+import {Link} from 'react-router-dom';
 
 
 
@@ -11,12 +12,15 @@ export class CreateGroup extends Component {
   }
 
   handleFormSubmit = (event) => {
+    console.log('entra a submit');
     event.preventDefault();
-    const groupName = this.state.groupName;
+    const groupName = this.state.group;
+    console.log('GRUPO:', groupName);
     axios
       .post("http://localhost:4000/group/creategroup", { groupName })
       .then(() => {
-        this.setState({ groupName: "" });
+//        this.setState({ groupName:  });
+        //VER QUE PONER
       })
       .catch((error) => console.log(error));
   };
@@ -31,8 +35,10 @@ export class CreateGroup extends Component {
       <div>
         <form>
           {/* PREGUNTAR LOS VALUES */}
-          <input type="text" name="group" value="" placeholder="Group-Name"></input>
-          <input type="submit" name="" value="next"></input>
+          <input type="text" name="group" placeholder="Group-Name" onChange={this.handleChange}></input>
+          <Link to={'/tasks'}>
+            <input type="submit" name="" value="next" onClick={this.handleFormSubmit}></input>
+          </Link>
         </form>
       </div>
     );

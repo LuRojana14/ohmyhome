@@ -70,16 +70,17 @@ class SignUpClass extends Component {
             boxShadow: '0px 4px 10px rgba(0,0,0,0.1)',
           }}
         >
-          {!this.state.isLogged ? (
+         
             <>
               <Input type='text' name='username' value={username} placeholder='cleaner name' onChange={this.handleChange} />
               <Input type='password' name='password' value={password} placeholder='password' onChange={this.handleChange} />
               <Input type='text' name='namegroup' value={namegroup} placeholder='Group-Name' onChange={this.handleChange} />
               <Button type='submit' color={'green'} onClick={this.onSubmit} >Submit</Button>
+              
             </>
-          ) : (
+          
               <CreateGroup />
-            )}
+            
 
           <p>already have an account?</p>
           <Link to={'/login'}>To login</Link>
